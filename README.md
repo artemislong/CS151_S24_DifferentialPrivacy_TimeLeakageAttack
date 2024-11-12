@@ -9,7 +9,6 @@
 
 ### 📄 Summary
 This project analyzes student disciplinary data from New Mexico school districts (2010-11 to 2021-22). The data includes sensitive information such as student demographics, infraction types, and disciplinary actions. The goal is to implement differential privacy measures to protect individual privacy while gaining insights into disciplinary patterns, repeat offenses, racial disparities, and drug-related incidents. Additionally, we explore the implications of potential side-channel attacks on data privacy.
-
 ---
 
 ### 🌟 Objectives
@@ -24,6 +23,7 @@ This project analyzes student disciplinary data from New Mexico school districts
 
 4. **Address side-channel attack vulnerability**  
    Identify and sufficiently prevent information leakage from timing side-channel attack.
+   ![image](https://github.com/user-attachments/assets/3c188124-9982-47ee-a0ce-1a90f8899d48)
 ---
 
 ### 📊 Dataset Structure & Privacy Concerns
@@ -85,8 +85,6 @@ The privacy-preserving approach, with considerations for side-channel risks, mai
 This project provides a blueprint for privacy-preserving analysis in sensitive data sectors, showcasing how to balance actionable insights with stringent privacy protections and defenses against side-channel vulnerabilities.
 
 ---
-
-![image](https://github.com/user-attachments/assets/3c188124-9982-47ee-a0ce-1a90f8899d48)
 
 ![image](https://github.com/user-attachments/assets/2d519966-300e-4280-bd73-dbe2da1adcce)
 
