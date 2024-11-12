@@ -86,4 +86,12 @@ This project provides a blueprint for privacy-preserving analysis in sensitive d
 
 ---
 
-This project provides a blueprint for privacy-preserving analysis in sensitive data sectors, showcasing how to balance actionable insights with stringent privacy protections and defenses against side-channel vulnerabilities.
+![image](https://github.com/user-attachments/assets/3c188124-9982-47ee-a0ce-1a90f8899d48)
+
+![image](https://github.com/user-attachments/assets/2d519966-300e-4280-bd73-dbe2da1adcce)
+
+![image](https://github.com/user-attachments/assets/a985107f-13cd-4889-a1b2-8a1f3e475f5d)
+
+![image](https://github.com/user-attachments/assets/6d360ca1-b0a4-4073-9305-f6b3dd294100)
+
+![image](https://github.com/user-attachments/assets/634dc3b4-9317-4e36-95c7-5f86351e73c6)
