@@ -1,5 +1,3 @@
-# CS151_Spring2024_DifferentialPrivacy_EducationProject
----
 
 # Project Overview: Privacy-Preserving Analytics on Student Disciplinary Data
 
