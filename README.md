@@ -2,7 +2,7 @@
 # Project Overview: Privacy-Preserving Analytics on Student Disciplinary Data with Side-Channel Protection Mechanism
 
 **Team Members:** Artem Dinh, Furkan Sarikaya, Tom Lu  
-**Class:** CS151-03: Privacy, Security, and Data
+**Class:** CS151-03: Privacy, Security, and Data   
 **Instructor:** Professor Johes Bater
 
 ---
