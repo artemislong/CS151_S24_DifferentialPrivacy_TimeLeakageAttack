@@ -8,7 +8,9 @@
 ---
 
 ### 📄 Summary
+
 This project analyzes student disciplinary data from New Mexico school districts (2010-11 to 2021-22). The data includes sensitive information such as student demographics, infraction types, and disciplinary actions. The goal is to implement differential privacy measures to protect individual privacy while gaining insights into disciplinary patterns, repeat offenses, racial disparities, and drug-related incidents. Additionally, we explore the implications of potential side-channel attacks on data privacy.
+
 ---
 
 ### 🌟 Objectives
