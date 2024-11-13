@@ -1,5 +1,5 @@
 
-# Project Overview: Privacy-Preserving Analytics on Student Disciplinary Data
+# Project Overview: Privacy-Preserving Analytics on Student Disciplinary Data with Side-Channel Protection Mechanism
 
 **Team Members:** Artem Dinh, Furkan Sarikaya, Tom Lu  
 **Class:** CS151-03: Privacy, Security, and Data
@@ -9,88 +9,93 @@
 
 ### 📄 Summary
 
-This project analyzes student disciplinary data from New Mexico school districts (2010-11 to 2021-22). The data includes sensitive information such as student demographics, infraction types, and disciplinary actions. The goal is to implement differential privacy measures to protect individual privacy while gaining insights into disciplinary patterns, repeat offenses, racial disparities, and drug-related incidents. Additionally, we explore the implications of potential side-channel attacks on data privacy.
+This project applies differential privacy techniques to student disciplinary data from New Mexico school districts (2010-11 to 2021-22), containing sensitive information on demographics, infractions, and disciplinary actions. Our primary goal is to secure individual privacy while facilitating safe data analytics. We incorporate side-channel attack prevention to mitigate information leakage from timing variations.
 
 ---
 
 ### 🌟 Objectives
-1. **Protect Privacy**  
-   Implement differential privacy mechanisms to safeguard student identities, addressing re-identification risks and mitigating the impact of side-channel attacks.
-   
-2. **Analyze for Insights**  
-   Extract meaningful insights to inform policies, resource allocation, and student support strategies, balancing data utility with privacy.
-   
-3. **Evaluate Privacy-Utility Trade-offs**  
-   Assess the impact of privacy protections on data accuracy to ensure both security and actionable insights.
 
-4. **Address side-channel attack vulnerability**  
-   Identify and sufficiently prevent information leakage from timing side-channel attack.
-   ![image](https://github.com/user-attachments/assets/3c188124-9982-47ee-a0ce-1a90f8899d48)
+1. **Implement Differential Privacy**  
+   Protect student identities using differential privacy, particularly the K-ary randomized response mechanism, to add controlled noise to sensitive columns.
+   
+2. **Prevent Side-Channel Leakage**  
+   Identify and mitigate timing-based side-channel attacks that could leak sensitive information through variations in execution time.
+
+3. **Evaluate Privacy-Utility Trade-Offs**  
+   Balance data utility with privacy protections to ensure data remains actionable for analytics.
+
 ---
 
 ### 📊 Dataset Structure & Privacy Concerns
+
 The dataset includes:
-- Student demographics: race, gender, grade level.
-- Incident details: types of infractions (e.g., drug, alcohol, hate crimes).
-- Responses: disciplinary actions taken by schools.
+- **Demographics**: race, gender, grade level.
+- **Incident Details**: types of infractions (e.g., drug, alcohol, hate crimes).
+- **Disciplinary Actions**: responses taken by the schools.
 
 **Privacy Risks**  
-Key risks include re-identification and side-channel attacks, where attackers might infer sensitive information indirectly (e.g., through response timing or access patterns). To address these, the project applies differential privacy, particularly the K-ary randomized response mechanism, which adds controlled noise to sensitive data columns.
+Re-identification and side-channel risks are prominent. Side-channel attacks could exploit timing differences in the data processing pipeline, potentially inferring sensitive information based on the response time of queries.
 
 ---
 
-### 🔍 Analytical Methods & Key Findings
-1. **Privacy Mechanism: K-ary Randomized Response**  
-   Noise is added selectively to sensitive columns based on a configured probability (epsilon), which controls privacy levels according to the data’s sensitivity. Additional precautions were taken to reduce side-channel leakage.
+### 🔍 Differential Privacy Implementation: K-ary Randomized Response
 
-2. **Query Results: Key Insights**  
-   - **Repeat Offenses:** Approximately 37% of disciplinary incidents are from repeat offenders, suggesting that the current disciplinary measures may need revision.
-   - **Grade-Level Patterns:** A spike in infractions occurs when students move from elementary (5th grade) to middle school (6th grade), indicating possible adjustment challenges.
-   - **Racial Disparities:** Native Hawaiian students face a disproportionate rate of arrest, highlighting a potential racial bias in disciplinary practices.
-   - **Drug-Related Infractions:** A substantial portion of serious incidents involves drugs, suggesting a need for focused prevention policies.
+**Privacy Mechanism: K-ary Randomized Response**  
+To protect sensitive data columns, we used the K-ary randomized response mechanism. By adding controlled noise, we ensure that individual data points are obfuscated to prevent direct identification. We vary the noise based on an adaptive `epsilon` value, which is adjusted based on the size of each group (e.g., school district) to provide stronger privacy for smaller groups.
 
----
+- **Epsilon Values**: Privacy levels are controlled through an `epsilon` parameter that adjusts the probability of flipping values based on group size. Lower values indicate stronger privacy for sensitive, smaller groups, while larger groups have slightly relaxed privacy budgets for better utility.
 
-### ⚖️ Balancing Privacy & Utility
-**Error Tolerance**  
-The project set an acceptable mean absolute error of 5% to maintain data accuracy. Different privacy budgets were applied based on the data's intended use, allowing for adjustments in accuracy where higher precision is needed.
-
-**Result**  
-The privacy-preserving approach, with considerations for side-channel risks, maintained data utility within the set error tolerance, demonstrating that differential privacy mechanisms can effectively protect sensitive information without significant loss of data quality.
-
----
-
-### 🔄 Recommendations
-1. **Enhanced Support for Students**  
-   High repeat offense rates indicate a need for supportive rather than purely punitive disciplinary approaches.
-
-2. **Focused Policy for Middle School**  
-   The increase in infractions among 6th graders suggests a need for targeted policies to ease the transition from elementary to middle school.
-
-3. **Address Racial Disparities**  
-   Disproportionate arrest rates for Native Hawaiian students highlight a need to review disciplinary policies for potential biases.
-
-4. **Drug Prevention Initiatives**  
-   Drug-related incidents should be addressed with preventive programs aimed at reducing their occurrence in schools.
-
----
-
-### 📈 Future Improvements
-- **Strengthening Side-Channel Protections**  
-  Future work should explore additional mitigations to further reduce vulnerability to side-channel attacks, such as timing or access-pattern leaks.
-
-- **Exploration of Alternative Privacy Libraries**  
-  Investigate other privacy libraries like OpenDP or TensorFlow Privacy to explore more sophisticated privacy-preserving methods.
-
----
-
-This project provides a blueprint for privacy-preserving analysis in sensitive data sectors, showcasing how to balance actionable insights with stringent privacy protections and defenses against side-channel vulnerabilities.
-
----
-
-![image](https://github.com/user-attachments/assets/2d519966-300e-4280-bd73-dbe2da1adcce)
+- **Noising Approach**: For each sensitive column, values are flipped randomly based on an epsilon-dependent probability, adding privacy while preserving some level of utility for each column.
 
 ![image](https://github.com/user-attachments/assets/a985107f-13cd-4889-a1b2-8a1f3e475f5d)
+![image](https://github.com/user-attachments/assets/2d519966-300e-4280-bd73-dbe2da1adcce)
+
+---
+### ⚖️ Balancing Privacy & Utility
+
+We evaluated the privacy-utility trade-offs by applying different configurations of epsilon values, with larger privacy budgets (higher epsilon values) allowing for more data utility at the cost of slightly reduced privacy. We measured the runtime impacts of these configurations with and without side-channel protections.
+
+---
+
+### 🔐 Side-Channel Attack Vulnerability & Prevention
+
+**Understanding Time Leakage Attack**  
+A side-channel attack in this context leverages timing discrepancies to deduce sensitive information about whether or not a data value was altered. When using randomized response mechanisms, even small timing variations during value flips could reveal insights, particularly if attackers can access repeated observations of the system.
+
+**Initial Vulnerability**  
+In our initial function, `flip_value`, the value of `x` was either retained or replaced with another random value based on a flip probability. If `x` was not flipped, the function simply returned it directly, taking slightly less time than if `x` had been replaced. These timing differences introduced a risk of side-channel leakage by potentially allowing attackers to deduce whether or not a value was flipped.
+
+**Time Leakage Protection Mechanism**  
+To prevent side-channel leaks, we modified the function as follows:
+- **Consistent Execution Path**: In the updated function `flip_value_SideChannel`, even if the value is not flipped, the function still selects an alternative random value from the domain and discards it, before returning `x`. This added operation ensures that every call to the function takes approximately the same amount of time.
+- **Equalized Timing**: By maintaining a consistent execution path regardless of the flip decision, we eliminate the timing discrepancies that could have allowed attackers to infer whether values were flipped or retained.
+
+---
+
+### 📈 Side-Channel Protection Results
+
+Our runtime analysis compared the timing impact of configurations with and without side-channel protection:
+- **Secure Configuration**: The side-channel-protected version (`flip_value_SideChannel`) showed consistent runtimes across all operations, mitigating the potential for timing-based inference attacks.
+- **Performance Metrics**: Our tests, with mean and standard deviation calculations, confirmed that the protected function eliminates timing discrepancies, achieving secure execution without significant runtime overhead.
+
+![image](https://github.com/user-attachments/assets/3c188124-9982-47ee-a0ce-1a90f8899d48)
+
+---
+
+### 🔄 Recommendations for Future Work
+
+1. **Strengthen Side-Channel Protections**  
+   Future enhancements could explore additional timing equalization techniques to further reduce vulnerability to side-channel attacks.
+
+2. **Alternative Privacy Libraries**  
+   Testing libraries such as OpenDP or TensorFlow Privacy could reveal more sophisticated privacy-preserving methods that integrate seamlessly with machine learning models or provide additional defense mechanisms against side-channel risks.
+
+---
+
+This project demonstrates how differential privacy and side-channel protections can be integrated into sensitive data analytics to balance actionable insights with stringent privacy standards.
+
+---
+
 
 ![image](https://github.com/user-attachments/assets/6d360ca1-b0a4-4073-9305-f6b3dd294100)
 
